@@ -33,6 +33,6 @@
 enum APIConstants {
   static let host = "api.petfinder.com"
   static let grantType = "client_credentials"
-  static let clientId = "YourKeyHere"
-  static let clientSecret = "YourSecretHere"
+  static let clientId = "6NiwTQ37kGorxTP9olWC9gYesVWvPhjqBtdZgAcwxcuYkbrV4a"
+  static let clientSecret = "2yMp41H0NynW2XepHKrk6T8JEWkipnjWkndwPaoy"
 }

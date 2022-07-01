@@ -33,11 +33,53 @@
 import SwiftUI
 
 struct AnimalsNearYouView: View {
+  
+  private let requestManager = RequestManager()
+  @State var animals: [Animal] = []
+  @State var isLoading = true
+  
+  
+  func fetchAnimals() async {
+    do {
+      // 1 Calls perform(_:) and stores the result in animalsContainer. Since this method uses generics, you need to indicate the type, in this case, AnimalsContainer. You pass 1 to the page as an argument and nil to latitude and longitude because you won’t work with location or pagination in this chapter.
+      let animalsContainer: AnimalsContainer =
+        try await requestManager.perform(AnimalsRequest.getAnimalsWith(
+          page: 1,
+          latitude: nil,
+          longitude: nil))
+      // 2 Stores the list of animals returned by the request in animals.
+      self.animals = animalsContainer.animals
+      // 3
+      await stopLoading()
+    } catch {}
+  }
+  
   var body: some View {
     NavigationView {
-      Text("TODO: Animals Near You View")
+      // 1. Sets up a List with a ForEach that creates an AnimalRow for each animal.
+      List {
+        ForEach(animals) { animal in
+          AnimalRow(animal: animal)
+        }
+      }
+      // 2. Uses task(priority:_:) to call fetchAnimals(). Since this is an asynchronous method, you need to use await so the system can handle it properly.
+      .task {
+          await fetchAnimals()
+        }
+        .listStyle(.plain)
         .navigationTitle("Animals near you")
+      // 3 Adds an overlay(alignment:content:) that will show a ProgressView when isLoading is true.
+        .overlay {
+          if isLoading {
+            ProgressView("Finding Animals near you...")
+          }
+        }
     }.navigationViewStyle(StackNavigationViewStyle())
+  }
+  
+  @MainActor
+  func stopLoading() async {
+    isLoading = false
   }
 }
 
