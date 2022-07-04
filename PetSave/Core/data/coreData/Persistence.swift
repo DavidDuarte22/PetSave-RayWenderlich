@@ -38,9 +38,10 @@ struct PersistenceController {
   static var preview: PersistenceController = {
     let result = PersistenceController(inMemory: true)
     let viewContext = result.container.viewContext
+    // This code initializes entries into the in-memory store. It grabs the ith entry from the mock Animal array and uses toManagedObject(context:) to persist it to Core Data which will come in handy when previewing views later.
     for i in 0..<10 {
-      let newItem = Item(context: viewContext)
-      newItem.timestamp = Date()
+      var animal = Animal.mock[i]
+      animal.toManagedObject(context: viewContext)
     }
     do {
       try viewContext.save()
@@ -51,10 +52,10 @@ struct PersistenceController {
     return result
   }()
 
-  let container: NSPersistentContainer
+  let container: NSPersistentCloudKitContainer
 
   init(inMemory: Bool = false) {
-    container = NSPersistentContainer(name: "PetSave")
+    container = NSPersistentCloudKitContainer(name: "PetSave")
     if inMemory {
       container.persistentStoreDescriptions.first?.url = URL(fileURLWithPath: "/dev/null")
     }
@@ -65,5 +66,24 @@ struct PersistenceController {
     }
     container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
     container.viewContext.automaticallyMergesChangesFromParent = true
+  }
+  
+  static func save() {
+    // You get a reference to the Core Data Context. In this case, using the on-disk store.
+    let context =
+      PersistenceController.shared.container.viewContext
+    // You don’t need to save unless there are pending changes, so return if hasChanges is false.
+    guard context.hasChanges else { return }
+
+    // The call to context.save() can throw, so wrap it in a do/catch. Any errors get their information sent to a fatalError call.
+    do {
+      try context.save()
+    } catch {
+        fatalError("""
+          \(#file), \
+          \(#function), \
+          \(error.localizedDescription)
+        """)
+    }
   }
 }

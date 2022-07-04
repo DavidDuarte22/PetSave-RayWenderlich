@@ -42,4 +42,67 @@ class CoreDataTests: XCTestCase {
   override func tearDownWithError() throws {
     try super.tearDownWithError()
   }
+  
+  func testToManagedObject() throws {
+    // This test method takes advantage of the in-memory store, which has a fixed set of pets already persisted.
+    let previewContext =
+      PersistenceController.preview.container.viewContext
+
+    // The fetchRequest on AnimalEntity generates a fetch request. fetchLimit limits the fetch to one result, and a guard checks for a valid result.
+    let fetchRequest = AnimalEntity.fetchRequest()
+    fetchRequest.fetchLimit = 1
+    fetchRequest.sortDescriptors =
+      [NSSortDescriptor(keyPath: \AnimalEntity.name,
+      ascending: true)]
+    guard let results = try? previewContext.fetch(fetchRequest),
+      let first = results.first else { return }
+
+    // If the result is valid, a series of XCTestAsserts test various fields of the result against the expected value from AnimalsMock.json.
+    XCTAssert(first.name == "CHARLA", """
+      Pet name did not match, was expecting Kiki, got
+      \(String(describing: first.name))
+    """)
+    XCTAssert(first.type == "Dog", """
+      Pet type did not match, was expecting Cat, got
+      \(String(describing: first.type))
+    """)
+    XCTAssert(first.coat.rawValue == "Short", """
+      Pet coat did not match, was expecting Short, got
+      \(first.coat.rawValue)
+    """)
+  }
+  
+  func testDeleteManagedObject() throws {
+    let previewContext =
+      PersistenceController.preview.container.viewContext
+
+    let fetchRequest = AnimalEntity.fetchRequest()
+    guard let results = try? previewContext.fetch(fetchRequest),
+      let first = results.first else { return }
+
+    let expectedResult = results.count - 1
+    previewContext.delete(first)
+
+    guard let resultsAfterDeletion = try? previewContext.fetch(fetchRequest)
+      else { return }
+
+    XCTAssertEqual(expectedResult, resultsAfterDeletion.count, """
+      The number of results was expected to be \(expectedResult) after deletion, was \(results.count)
+    """)
+  }
+
+  func testFetchObject() {
+    let previewContext =
+      PersistenceController.preview.container.viewContext
+    let fetchRequest = AnimalEntity.fetchRequest()
+    fetchRequest.fetchLimit = 1
+    fetchRequest.predicate = .init(format: "name == %@", "Ellie")
+    guard let results = try? previewContext.fetch(fetchRequest),
+      let first = results.first else { return }
+    XCTAssert(first.name == "Ellie", """
+      Pet name did not match, expecting Ellie, got
+      \(String(describing: first.name))
+    """)
+  }
+  
 }

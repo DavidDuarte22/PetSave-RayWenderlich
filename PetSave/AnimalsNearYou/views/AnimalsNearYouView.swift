@@ -35,31 +35,54 @@ import SwiftUI
 struct AnimalsNearYouView: View {
   
   private let requestManager = RequestManager()
-  @State var animals: [Animal] = []
+  @SectionedFetchRequest<String, AnimalEntity>(
+    sectionIdentifier: \AnimalEntity.animalSpecies,
+    sortDescriptors: [
+      NSSortDescriptor(keyPath: \AnimalEntity.timestamp,
+                     ascending: true)
+      ],
+    animation: .default
+  ) private var sectionedAnimals:
+      SectionedFetchResults<String, AnimalEntity>
+
   @State var isLoading = true
   
   
   func fetchAnimals() async {
     do {
-      // 1 Calls perform(_:) and stores the result in animalsContainer. Since this method uses generics, you need to indicate the type, in this case, AnimalsContainer. You pass 1 to the page as an argument and nil to latitude and longitude because you won’t work with location or pagination in this chapter.
-      let animalsContainer: AnimalsContainer =
-        try await requestManager.perform(AnimalsRequest.getAnimalsWith(
+      // perform(_:) connects to the Petfinder API and gets the animals in a structure.
+      let animalsContainer: AnimalsContainer = try await
+      requestManager.perform(
+        AnimalsRequest.getAnimalsWith(
           page: 1,
           latitude: nil,
-          longitude: nil))
-      // 2 Stores the list of animals returned by the request in animals.
-      self.animals = animalsContainer.animals
-      // 3
+          longitude: nil
+        )
+      )
+
+      for var animal in animalsContainer.animals {
+        // Iterate over each animal and call toManagedObject(context:) to convert it from the structure to a Core Data object.
+        animal.toManagedObject()
+      }
+
       await stopLoading()
-    } catch {}
+    } catch {
+      print("Error fetching animals...\(error)")
+    }
   }
   
   var body: some View {
     NavigationView {
       // 1. Sets up a List with a ForEach that creates an AnimalRow for each animal.
       List {
-        ForEach(animals) { animal in
-          AnimalRow(animal: animal)
+        ForEach(sectionedAnimals) { animals in
+          Section(header: Text(animals.id)) {
+            ForEach(animals) { animal in
+              NavigationLink(destination: AnimalDetailsView()) {
+                AnimalRow(animal: animal)
+              }
+            }
+          }
         }
       }
       // 2. Uses task(priority:_:) to call fetchAnimals(). Since this is an asynchronous method, you need to use await so the system can handle it properly.
@@ -85,6 +108,8 @@ struct AnimalsNearYouView: View {
 
 struct AnimalsNearYouView_Previews: PreviewProvider {
   static var previews: some View {
-    AnimalsNearYouView()
+    AnimalsNearYouView(isLoading: false)
+      .environment(\.managedObjectContext,
+        PersistenceController.preview.container.viewContext)
   }
 }
