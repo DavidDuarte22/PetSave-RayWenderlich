@@ -33,83 +33,60 @@
 import SwiftUI
 
 struct AnimalsNearYouView: View {
-  
-  private let requestManager = RequestManager()
-  @SectionedFetchRequest<String, AnimalEntity>(
-    sectionIdentifier: \AnimalEntity.animalSpecies,
+  @FetchRequest(
     sortDescriptors: [
-      NSSortDescriptor(keyPath: \AnimalEntity.timestamp,
-                     ascending: true)
-      ],
+      NSSortDescriptor(keyPath: \AnimalEntity.timestamp, ascending: true)
+    ],
     animation: .default
-  ) private var sectionedAnimals:
-      SectionedFetchResults<String, AnimalEntity>
-
-  @State var isLoading = true
+  )
   
-  
-  func fetchAnimals() async {
-    do {
-      // perform(_:) connects to the Petfinder API and gets the animals in a structure.
-      let animalsContainer: AnimalsContainer = try await
-      requestManager.perform(
-        AnimalsRequest.getAnimalsWith(
-          page: 1,
-          latitude: nil,
-          longitude: nil
-        )
-      )
+  private var animals: FetchedResults<AnimalEntity>
 
-      for var animal in animalsContainer.animals {
-        // Iterate over each animal and call toManagedObject(context:) to convert it from the structure to a Core Data object.
-        animal.toManagedObject()
-      }
+  @ObservedObject var viewModel: AnimalsNearYouViewModel
 
-      await stopLoading()
-    } catch {
-      print("Error fetching animals...\(error)")
-    }
-  }
-  
   var body: some View {
     NavigationView {
       // 1. Sets up a List with a ForEach that creates an AnimalRow for each animal.
       List {
-        ForEach(sectionedAnimals) { animals in
-          Section(header: Text(animals.id)) {
-            ForEach(animals) { animal in
-              NavigationLink(destination: AnimalDetailsView()) {
-                AnimalRow(animal: animal)
-              }
-            }
+        ForEach(animals) { animal in
+          NavigationLink(destination: AnimalDetailsView()) {
+            AnimalRow(animal: animal)
           }
+        }
+        // When it appears, the task(priority:_:) modifier calls fetchMoreAnimals() to asynchronously fetch more animals from the API.
+        if !animals.isEmpty && viewModel.hasMoreAnimals {
+          ProgressView("Finding more animals...")
+            .padding()
+            .frame(maxWidth: .infinity)
+            .task {
+              await viewModel.fetchMoreAnimals()
+            }
         }
       }
+      
       // 2. Uses task(priority:_:) to call fetchAnimals(). Since this is an asynchronous method, you need to use await so the system can handle it properly.
       .task {
-          await fetchAnimals()
+        await viewModel.fetchAnimals()
         }
-        .listStyle(.plain)
-        .navigationTitle("Animals near you")
+      .listStyle(.plain)
+      .navigationTitle("Animals near you")
       // 3 Adds an overlay(alignment:content:) that will show a ProgressView when isLoading is true.
-        .overlay {
-          if isLoading {
-            ProgressView("Finding Animals near you...")
-          }
+      .overlay {
+        if viewModel.isLoading && animals.isEmpty {
+          ProgressView("Finding Animals near you...")
         }
+      }
     }.navigationViewStyle(StackNavigationViewStyle())
-  }
-  
-  @MainActor
-  func stopLoading() async {
-    isLoading = false
   }
 }
 
 struct AnimalsNearYouView_Previews: PreviewProvider {
   static var previews: some View {
-    AnimalsNearYouView(isLoading: false)
-      .environment(\.managedObjectContext,
-        PersistenceController.preview.container.viewContext)
+    AnimalsNearYouView(viewModel:
+                        AnimalsNearYouViewModel(
+                          animalFetcher: AnimalsFetcherMock(),
+                          animalStore: AnimalStoreService(context: CoreDataHelper.previewContext)
+                        )
+    )
   }
 }
