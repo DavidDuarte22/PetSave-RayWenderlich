@@ -47,12 +47,7 @@ struct AnimalsNearYouView: View {
   var body: some View {
     NavigationView {
       // 1. Sets up a List with a ForEach that creates an AnimalRow for each animal.
-      List {
-        ForEach(animals) { animal in
-          NavigationLink(destination: AnimalDetailsView()) {
-            AnimalRow(animal: animal)
-          }
-        }
+      AnimalListView(animals: animals) {
         // When it appears, the task(priority:_:) modifier calls fetchMoreAnimals() to asynchronously fetch more animals from the API.
         if !animals.isEmpty && viewModel.hasMoreAnimals {
           ProgressView("Finding more animals...")

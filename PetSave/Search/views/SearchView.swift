@@ -33,16 +33,95 @@
 import SwiftUI
 
 struct SearchView: View {
+  @FetchRequest(
+    sortDescriptors: [
+      NSSortDescriptor(
+        keyPath: \AnimalEntity.timestamp, ascending: true)
+    ],
+    animation: .default
+  )
+  private var animals: FetchedResults<AnimalEntity>
+  @State var filterPickerIsPresented = false
+
+  @StateObject var viewModel = SearchViewModel(
+    animalSearcher: AnimalSearcherService(requestManager: RequestManager()),
+    animalStore: AnimalStoreService(
+      context: PersistenceController.shared.container.newBackgroundContext()
+    )
+  )
+
+  var filteredAnimals: [AnimalEntity] {
+    guard viewModel.shouldFilter else { return [] }
+    return filterAnimals()
+  }
+
   var body: some View {
     NavigationView {
-      Text("TODO: Search View")
-        .navigationTitle("Find your future pet")
+      AnimalListView(animals: filteredAnimals)
+      // Adds a new button in the top right corner of the toolbar.
+        .toolbar {
+          ToolbarItem {
+            Button {
+              filterPickerIsPresented.toggle()
+            } label: {
+              Label("Filter", systemImage: "slider.horizontal.3")
+            }
+            // presents SearchFilterView inside a NavigationView using sheet(isPresented:onDismiss:content:). The modal will appear when filterPickerIsPresented is true.
+            .sheet(isPresented: $filterPickerIsPresented) {
+              NavigationView {
+                SearchFilterView(viewModel: viewModel)
+              }
+            }
+          }
+        }
+        .searchable(
+          text: $viewModel.searchText,
+          placement: .navigationBarDrawer(displayMode: .always)
+        )
+      // onChange(of:perform:) is a modifier that observes changes to a type that conforms to Equatable, in this case viewModel.searchText.
+      .onChange(of: viewModel.searchText) { _ in
+        // It then calls a closure with a new value whenever it changes, you put viewModel.search() so it gets called when the user types on the search bar.
+        viewModel.search()
+      }
+      .overlay {
+        // Adds a new overlay to the view that appears when filteredAnimals is empty, and there isn’t any text in the search bar, nor any age and type selected.
+        if filteredAnimals.isEmpty && viewModel.searchText.isEmpty {
+          // Creates a SuggestionsGrid. This is a view contained in this chapter’s starter project that shows a grid of animal types users can tap to filter.
+          SuggestionsGrid(suggestions: AnimalSearchType.suggestions) { suggestion in
+            // If a suggestion is selected, you call selectTypeSuggestion(_:) to update the view model and fire a search.
+            viewModel.selectTypeSuggestion(suggestion)
+          }
+          .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+        }
+      }
+
+      .navigationTitle("Find your future pet")
     }.navigationViewStyle(StackNavigationViewStyle())
+  }
+  
+  private var filterAnimals: FilterAnimals {
+    FilterAnimals(
+      animals: animals,
+      query: viewModel.searchText,
+      age: viewModel.ageSelection,
+      type: viewModel.typeSelection
+    )
   }
 }
 
 struct SearchView_Previews: PreviewProvider {
   static var previews: some View {
-    SearchView()
+    SearchView(
+      viewModel: SearchViewModel(
+        animalSearcher: AnimalSearcherMock(),
+        animalStore: AnimalStoreService(
+          context: PersistenceController.preview.container.viewContext
+        )
+      )
+    )
+    .environment(
+      \.managedObjectContext,
+      PersistenceController.preview.container.viewContext
+    )
   }
 }
