@@ -31,12 +31,50 @@
 /// THE SOFTWARE.
 
 import SwiftUI
+import PetSaveOnboarding
 
 @main
 struct AppMain: App {
+  // @AppStorage is a SwiftUI property wrapper that works hand-in-hand with UserDefaults. It saves the value of shouldPresentOnboarding in UserDefaults.
+  @AppStorage(AppUserDefaultsKeys.onboarding)
+    var shouldPresentOnboarding = true
+  // The model data to show the first time of app launch.
+  var onboardingModels: [OnboardingModel] {
+    [
+      OnboardingModel(
+        title: "Welcome to\n PetSave",
+        description:
+          "Looking for a Pet?\n Then you're at the right place",
+        image: .bird
+      ),
+      OnboardingModel(
+        title: "Search...",
+        description:
+          "Search from a list of our huge database of animals.",
+        image: .dogBoneStand
+      ),
+      OnboardingModel(
+        title: "Nearby",
+        description:
+          "Find pets to adopt from nearby your place...",
+        image: .chameleon
+      )
+    ]
+  }
+
   var body: some Scene {
     WindowGroup {
       ContentView()
-    }
+      // Shows the full-screen cover if shouldPresentOnboarding is true.
+      .fullScreenCover(
+        isPresented: $shouldPresentOnboarding, onDismiss: nil
+      ) {
+          // Presents PetSaveOnboardingView with the model data.
+          PetSaveOnboardingView(items: onboardingModels)
+          .onSkip { // On Skip button tap, set shouldPresentOnboarding to false to avoid showing the onboarding again.
+            shouldPresentOnboarding = false
+          }
+        }
+      }
   }
 }

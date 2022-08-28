@@ -50,6 +50,7 @@
 		03B6A910286F478400D63300 /* RequestManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A90F286F478400D63300 /* RequestManagerTests.swift */; };
 		03B6A912286F4B2700D63300 /* AccessTokenManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A911286F4B2700D63300 /* AccessTokenManagerTests.swift */; };
 		03B6A914286F525F00D63300 /* RequestManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A913286F525F00D63300 /* RequestManagerMock.swift */; };
+		03C08DB128BB802800E53CF9 /* PetSaveOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 03C08DB028BB802800E53CF9 /* PetSaveOnboarding */; };
 		03E1A89F288C3C360011BFCF /* AnimalsNearYouViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1A89E288C3C360011BFCF /* AnimalsNearYouViewModel.swift */; };
 		03E1A8A2288C609C0011BFCF /* FetchAnimalsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1A8A1288C609C0011BFCF /* FetchAnimalsService.swift */; };
 		03E1A8A4288C62840011BFCF /* AnimalsFetcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1A8A3288C62840011BFCF /* AnimalsFetcherMock.swift */; };
@@ -115,6 +116,19 @@
 			remoteInfo = PetSave;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		037724FA288FE8AC00266F5A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		037724DC288E9A2C00266F5A /* AnimalListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalListView.swift; sourceTree = "<group>"; };
@@ -218,6 +232,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C08DB128BB802800E53CF9 /* PetSaveOnboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +725,7 @@
 				18D775B922AD944300AE281E /* Sources */,
 				18D775BA22AD944300AE281E /* Frameworks */,
 				18D775BB22AD944300AE281E /* Resources */,
+				037724FA288FE8AC00266F5A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -717,6 +733,7 @@
 			);
 			name = PetSave;
 			packageProductDependencies = (
+				03C08DB028BB802800E53CF9 /* PetSaveOnboarding */,
 			);
 			productName = MyRWTutorial;
 			productReference = 18D775BD22AD944300AE281E /* PetSave.app */;
@@ -793,6 +810,7 @@
 			);
 			mainGroup = 18D775B422AD944300AE281E;
 			packageReferences = (
+				03C08DAF28BB802800E53CF9 /* XCRemoteSwiftPackageReference "PetSaveOnboarding" */,
 			);
 			productRefGroup = 18D775BE22AD944300AE281E /* Products */;
 			projectDirPath = "";
@@ -1431,6 +1449,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		03C08DAF28BB802800E53CF9 /* XCRemoteSwiftPackageReference "PetSaveOnboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DavidDuarte22/PetSaveOnboarding.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		03C08DB028BB802800E53CF9 /* PetSaveOnboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03C08DAF28BB802800E53CF9 /* XCRemoteSwiftPackageReference "PetSaveOnboarding" */;
+			productName = PetSaveOnboarding;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		037ADD3328724388009E29F2 /* PetSave.xcdatamodeld */ = {

@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "petsaveonboarding",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/DavidDuarte22/PetSaveOnboarding.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "b88ad28b5257e92cb501b0207c0b21e3e409d9a0"
+      }
+    }
+  ],
+  "version" : 2
+}
