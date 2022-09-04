@@ -45,6 +45,7 @@ struct AnimalContactLink: View {
           .imageScale(.large)
         Text(title)
           .font(.callout)
+          .accessibility(label: Text("The contact information for this pet: " + title))
       }
       .foregroundColor(color)
       .lineLimit(1)
@@ -66,8 +67,8 @@ struct AnimalContactLink_Previews: PreviewProvider {
         url: url,
         color: .green
       )
-        .padding()
-        .previewLayout(.sizeThatFits)
+      .padding()
+      .previewLayout(.sizeThatFits)
     }
   }
 }

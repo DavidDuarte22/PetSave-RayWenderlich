@@ -16,7 +16,7 @@ struct AnimalAttributesCard: ViewModifier {
       .padding(4)
       .background(color.opacity(0.2))
       .cornerRadius(8)
-      .foregroundColor(color)
+      .foregroundColor(color.darken(+40))
       .font(.subheadline)
   }
 }

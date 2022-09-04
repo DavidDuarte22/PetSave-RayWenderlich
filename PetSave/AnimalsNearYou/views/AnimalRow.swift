@@ -10,13 +10,19 @@ import SwiftUI
 
 struct AnimalRow: View {
   let animal: AnimalEntity
-  
-  var animalType: String {
-    animal.type ?? ""
-  }
+  var animalName: String
+  var animalType: String
+  var animalDescription: String
 
   var animalBreedAndType: String {
     "\(animal.breed) \(animalType)"
+  }
+  
+  init(animal: AnimalEntity) {
+    self.animal = animal
+    animalName = animal.name ?? ""
+    animalType = animal.type ?? ""
+    animalDescription = animal.desc ?? ""
   }
   
   var body: some View {
@@ -32,6 +38,7 @@ struct AnimalRow: View {
               ProgressView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(.gray.opacity(0.4))
+                .accessibilityHidden(true)
             }
           }
       }
@@ -40,28 +47,38 @@ struct AnimalRow: View {
       .cornerRadius(8)
 
       VStack(alignment: .leading) {
-        Text(animal.name ?? "")
+        Text(animalName)
           .multilineTextAlignment(.center)
           .font(.title3)
-        
+          .accessibilityLabel(animalName)
         Text(animalBreedAndType)
           .font(.callout)
-
+          .accessibilityHidden(true)
         if let description = animal.desc {
           Text(description)
             .lineLimit(2)
             .font(.footnote)
+            .accessibilityLabel(description)
+            .accessibilityHidden(true)
         }
         
         HStack {
           Text(animal.age.rawValue)
             .modifier(AnimalAttributesCard(color: animal.age.color))
+            .accessibilityLabel(animal.age.rawValue)
+            .accessibilityHidden(true)
           Text(animal.gender.rawValue)
             .modifier(AnimalAttributesCard(color: .pink))
+            .accessibilityLabel(animal.gender.rawValue)
         }
       }
       .lineLimit(1)
     }
+    .accessibilityElement(children: .combine)
+    .accessibilityCustomContent("Age", animal.age.rawValue, importance: .high)
+    .accessibilityCustomContent("Breed", animal.breed)
+    .accessibilityCustomContent("Type", animalType)
+    .accessibilityCustomContent("Description", animalDescription)
   }
 }
 
