@@ -51,6 +51,11 @@
 		03B6A912286F4B2700D63300 /* AccessTokenManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A911286F4B2700D63300 /* AccessTokenManagerTests.swift */; };
 		03B6A914286F525F00D63300 /* RequestManagerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A913286F525F00D63300 /* RequestManagerMock.swift */; };
 		03C08DB128BB802800E53CF9 /* PetSaveOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 03C08DB028BB802800E53CF9 /* PetSaveOnboarding */; };
+		03C08DB328C2128100E53CF9 /* NavigationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C08DB228C2128100E53CF9 /* NavigationRouter.swift */; };
+		03C08DB528C4DE6300E53CF9 /* AnimalDetailsViewRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C08DB428C4DE6300E53CF9 /* AnimalDetailsViewRepresentable.swift */; };
+		03C08DB828C4DF7100E53CF9 /* AnimalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C08DB628C4DF7100E53CF9 /* AnimalDetailsViewController.swift */; };
+		03C08DB928C4DF7100E53CF9 /* AnimalDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03C08DB728C4DF7100E53CF9 /* AnimalDetailsViewController.xib */; };
+		03C08DBB28C504CE00E53CF9 /* PetSaveTabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C08DBA28C504CE00E53CF9 /* PetSaveTabType.swift */; };
 		03E1A89F288C3C360011BFCF /* AnimalsNearYouViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1A89E288C3C360011BFCF /* AnimalsNearYouViewModel.swift */; };
 		03E1A8A2288C609C0011BFCF /* FetchAnimalsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1A8A1288C609C0011BFCF /* FetchAnimalsService.swift */; };
 		03E1A8A4288C62840011BFCF /* AnimalsFetcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1A8A3288C62840011BFCF /* AnimalsFetcherMock.swift */; };
@@ -174,6 +179,11 @@
 		03B6A90F286F478400D63300 /* RequestManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagerTests.swift; sourceTree = "<group>"; };
 		03B6A911286F4B2700D63300 /* AccessTokenManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenManagerTests.swift; sourceTree = "<group>"; };
 		03B6A913286F525F00D63300 /* RequestManagerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagerMock.swift; sourceTree = "<group>"; };
+		03C08DB228C2128100E53CF9 /* NavigationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationRouter.swift; sourceTree = "<group>"; };
+		03C08DB428C4DE6300E53CF9 /* AnimalDetailsViewRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalDetailsViewRepresentable.swift; sourceTree = "<group>"; };
+		03C08DB628C4DF7100E53CF9 /* AnimalDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalDetailsViewController.swift; sourceTree = "<group>"; };
+		03C08DB728C4DF7100E53CF9 /* AnimalDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimalDetailsViewController.xib; sourceTree = "<group>"; };
+		03C08DBA28C504CE00E53CF9 /* PetSaveTabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSaveTabType.swift; sourceTree = "<group>"; };
 		03E1A89E288C3C360011BFCF /* AnimalsNearYouViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsNearYouViewModel.swift; sourceTree = "<group>"; };
 		03E1A8A1288C609C0011BFCF /* FetchAnimalsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAnimalsService.swift; sourceTree = "<group>"; };
 		03E1A8A3288C62840011BFCF /* AnimalsFetcherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsFetcherMock.swift; sourceTree = "<group>"; };
@@ -257,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				037724DC288E9A2C00266F5A /* AnimalListView.swift */,
+				03C08DBA28C504CE00E53CF9 /* PetSaveTabType.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -532,7 +543,10 @@
 				84B0507126B0E3C300E0A709 /* AnimalContactsView.swift */,
 				84B0507726B0E8F500E0A709 /* AnimalContactLink.swift */,
 				84B0507326B0E45000E0A709 /* AnimalLocationView.swift */,
+				03C08DB628C4DF7100E53CF9 /* AnimalDetailsViewController.swift */,
+				03C08DB728C4DF7100E53CF9 /* AnimalDetailsViewController.xib */,
 				8472150726C1EC33001FD40B /* AnimalHeaderView.swift */,
+				03C08DB428C4DE6300E53CF9 /* AnimalDetailsViewRepresentable.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -624,6 +638,7 @@
 				84B0507B26B0EFA800E0A709 /* AddressFetcher.swift */,
 				8472DFAA26BF66EF000FEDAF /* LocationManager.swift */,
 				03B6A904286F32C200D63300 /* AppUserDefaultsKeys.swift */,
+				03C08DB228C2128100E53CF9 /* NavigationRouter.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -828,6 +843,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C08DB928C4DF7100E53CF9 /* AnimalDetailsViewController.xib in Resources */,
 				18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */,
 				18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */,
 				18D775C722AD944400AE281E /* Assets.xcassets in Resources */,
@@ -915,6 +931,7 @@
 				037ADD3628724388009E29F2 /* CoreDataHelper.swift in Sources */,
 				03B6A900286F313500D63300 /* NetworkError.swift in Sources */,
 				AE6A3786269B58350054C842 /* AnimalDetailsView.swift in Sources */,
+				03C08DB828C4DF7100E53CF9 /* AnimalDetailsViewController.swift in Sources */,
 				84A59F7E269E9BDB00237A83 /* AdoptionStatus.swift in Sources */,
 				AE6A3816269B5DCD0054C842 /* Gender.swift in Sources */,
 				037724E7288EA59000266F5A /* SearchFilterView.swift in Sources */,
@@ -931,6 +948,7 @@
 				037ADD3728724388009E29F2 /* Address+CoreData.swift in Sources */,
 				8FDD2CA326B311AC00DBE33F /* Pagination.swift in Sources */,
 				03B6A8E2286F0E3500D63300 /* Animal.swift in Sources */,
+				03C08DB528C4DE6300E53CF9 /* AnimalDetailsViewRepresentable.swift in Sources */,
 				845137A82796247E00A4DA57 /* EmptyResultsView.swift in Sources */,
 				03E1A8A2288C609C0011BFCF /* FetchAnimalsService.swift in Sources */,
 				8472DFCC26BF93B3000FEDAF /* AnimalsNearYouView.swift in Sources */,
@@ -940,9 +958,11 @@
 				84A59F7C269E92F800237A83 /* APIColors.swift in Sources */,
 				AE6A380E269B5DA90054C842 /* Breed.swift in Sources */,
 				84A59F76269E8DF000237A83 /* VideoLink.swift in Sources */,
+				03C08DB328C2128100E53CF9 /* NavigationRouter.swift in Sources */,
 				037ADD3928724388009E29F2 /* Organization+CoreData.swift in Sources */,
 				84B0507426B0E45000E0A709 /* AnimalLocationView.swift in Sources */,
 				03B6A905286F32C200D63300 /* AppUserDefaultsKeys.swift in Sources */,
+				03C08DBB28C504CE00E53CF9 /* PetSaveTabType.swift in Sources */,
 				845137A62796247E00A4DA57 /* SuggestionsGrid.swift in Sources */,
 				03E1A8A6288C64F10011BFCF /* AnimalStoreService.swift in Sources */,
 				03B6A8FC286F2BFF00D63300 /* AnimalsContainer.swift in Sources */,

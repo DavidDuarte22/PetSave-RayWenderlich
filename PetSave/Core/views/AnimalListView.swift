@@ -30,21 +30,35 @@ struct AnimalListView<Content, Data>: View
       EmptyView()
     }
   }
+  
+  @StateObject var navigationState = NavigationState()
+  @State var shouldShowDetails: Int? = -1
+  let router = AnimalDetailsRouter()
 
   var body: some View {
-    // The body of the view, laying down a list with rows of animals.
     List {
-      ForEach(animals) { animal in
-        NavigationLink(destination: AnimalDetailsView()) {
-          AnimalRow(animal: animal)
-        }
+      Button(
+        navigationState.isNavigatingDisabled ?
+        "Enable Navigation" : "Disable Navigation"
+      ) {
+        navigationState.isNavigatingDisabled.toggle()
       }
 
-      // The footer view passed in the initializer, placed at the bottom of the list.
+      ForEach(animals) { animal in
+        router.navigate(
+          data: animal,
+          navigationState: navigationState
+        ) {
+          AnimalRow(animal: animal)
+        }
+        .disabled(navigationState.isNavigatingDisabled)
+      }
+
       footer
     }
     .listStyle(.plain)
   }
+
 }
 
 struct AnimalListView_Previews: PreviewProvider {

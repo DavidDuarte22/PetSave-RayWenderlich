@@ -35,29 +35,41 @@ import SwiftUI
 struct ContentView: View {
   
   let managedObjectContext =
-    PersistenceController.shared.container.viewContext
-
+  PersistenceController.shared.container.viewContext
+  @StateObject var tabNavigator = PetSaveTabNavigator()
+  
   var body: some View {
-    TabView {
+    // You pass in the currentTab from the PetSaveTabNavigator object to the selection initializer.
+    TabView(selection: $tabNavigator.currentTab) {
       AnimalsNearYouView(
         viewModel: AnimalsNearYouViewModel(
           animalFetcher: FetchAnimalsService(requestManager: RequestManager()),
-            animalStore: AnimalStoreService(
-              context: PersistenceController.shared.container.newBackgroundContext()
-            )
+          animalStore: AnimalStoreService(
+            context: PersistenceController.shared.container.newBackgroundContext()
+          )
         )
       )
-        .environment(\.managedObjectContext, managedObjectContext)
-        .tabItem {
-          Label("Near you", systemImage: "location")
-        }
-
+      .badge(2)
+      // apply a tag to AnimalsNearYouView.
+      .tag(PetSaveTabType.nearYou)
+      .tabItem {
+        Label("Near you", systemImage: "location")
+      }
+      .environment(\.managedObjectContext, managedObjectContext)
+      
       SearchView()
-        .environment(\.managedObjectContext, managedObjectContext)
-
+        .tag(PetSaveTabType.search) // you apply a tag to SearchView.
         .tabItem {
           Label("Search", systemImage: "magnifyingglass")
         }
+        .environment(\.managedObjectContext, managedObjectContext)
+    }
+    // Receive the opened url
+    .onOpenURL { url in
+      // Get the correct tab type using url.
+      let type = PetSaveTabType.deepLinkType(url: url)
+      // Call switchTab(_:) to present the right tab depending on type.
+      self.tabNavigator.switchTab(to: type)
     }
   }
 }

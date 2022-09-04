@@ -66,7 +66,7 @@ struct AppMain: App {
     WindowGroup {
       ContentView()
       // Shows the full-screen cover if shouldPresentOnboarding is true.
-      .fullScreenCover(
+      .sheet(
         isPresented: $shouldPresentOnboarding, onDismiss: nil
       ) {
           // Presents PetSaveOnboardingView with the model data.

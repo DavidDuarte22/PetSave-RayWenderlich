@@ -32,6 +32,10 @@
 
 import SwiftUI
 
+class NavigationState: ObservableObject {
+  @Published var isNavigatingDisabled = false
+}
+
 struct AnimalsNearYouView: View {
   @FetchRequest(
     sortDescriptors: [
