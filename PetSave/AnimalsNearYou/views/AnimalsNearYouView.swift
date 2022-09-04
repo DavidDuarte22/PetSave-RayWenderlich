@@ -54,12 +54,17 @@ struct AnimalsNearYouView: View {
       AnimalListView(animals: animals) {
         // When it appears, the task(priority:_:) modifier calls fetchMoreAnimals() to asynchronously fetch more animals from the API.
         if !animals.isEmpty && viewModel.hasMoreAnimals {
-          ProgressView("Finding more animals...")
-            .padding()
-            .frame(maxWidth: .infinity)
-            .task {
-              await viewModel.fetchMoreAnimals()
-            }
+          // You used an HStack and set alignment to be center
+          HStack(alignment: .center) {
+            // Inside the HStack is the new LoadingAnimation and a frame modifier that sets the max width and height. Also, you added a Text to display the message “Loading more animals…”
+            LoadingAnimation()
+              .frame(maxWidth: 125, minHeight: 125)
+            Text("Loading more animals...")
+          }
+          // Put the asynchronous call to fetchMoreAnimals inside a task(priority:_:) modifier. You need to do this because the method is async. This code is called when the view appears.
+          .task {
+            await viewModel.fetchMoreAnimals()
+          }
         }
       }
       

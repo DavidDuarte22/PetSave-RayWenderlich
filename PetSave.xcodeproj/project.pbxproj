@@ -56,6 +56,8 @@
 		03C08DB828C4DF7100E53CF9 /* AnimalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C08DB628C4DF7100E53CF9 /* AnimalDetailsViewController.swift */; };
 		03C08DB928C4DF7100E53CF9 /* AnimalDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03C08DB728C4DF7100E53CF9 /* AnimalDetailsViewController.xib */; };
 		03C08DBB28C504CE00E53CF9 /* PetSaveTabType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C08DBA28C504CE00E53CF9 /* PetSaveTabType.swift */; };
+		03C08DBD28C513D100E53CF9 /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C08DBC28C513D100E53CF9 /* LoadingAnimation.swift */; };
+		03C08DBF28C51CAE00E53CF9 /* PetRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C08DBE28C51CAE00E53CF9 /* PetRankingView.swift */; };
 		03E1A89F288C3C360011BFCF /* AnimalsNearYouViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1A89E288C3C360011BFCF /* AnimalsNearYouViewModel.swift */; };
 		03E1A8A2288C609C0011BFCF /* FetchAnimalsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1A8A1288C609C0011BFCF /* FetchAnimalsService.swift */; };
 		03E1A8A4288C62840011BFCF /* AnimalsFetcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03E1A8A3288C62840011BFCF /* AnimalsFetcherMock.swift */; };
@@ -184,6 +186,8 @@
 		03C08DB628C4DF7100E53CF9 /* AnimalDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimalDetailsViewController.swift; sourceTree = "<group>"; };
 		03C08DB728C4DF7100E53CF9 /* AnimalDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnimalDetailsViewController.xib; sourceTree = "<group>"; };
 		03C08DBA28C504CE00E53CF9 /* PetSaveTabType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetSaveTabType.swift; sourceTree = "<group>"; };
+		03C08DBC28C513D100E53CF9 /* LoadingAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
+		03C08DBE28C51CAE00E53CF9 /* PetRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetRankingView.swift; sourceTree = "<group>"; };
 		03E1A89E288C3C360011BFCF /* AnimalsNearYouViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsNearYouViewModel.swift; sourceTree = "<group>"; };
 		03E1A8A1288C609C0011BFCF /* FetchAnimalsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchAnimalsService.swift; sourceTree = "<group>"; };
 		03E1A8A3288C62840011BFCF /* AnimalsFetcherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsFetcherMock.swift; sourceTree = "<group>"; };
@@ -268,6 +272,8 @@
 			children = (
 				037724DC288E9A2C00266F5A /* AnimalListView.swift */,
 				03C08DBA28C504CE00E53CF9 /* PetSaveTabType.swift */,
+				03C08DBC28C513D100E53CF9 /* LoadingAnimation.swift */,
+				03C08DBE28C51CAE00E53CF9 /* PetRankingView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -909,6 +915,7 @@
 				AE6A3782269B57940054C842 /* SearchView.swift in Sources */,
 				03B6A8F7286F298300D63300 /* ApiToken.swift in Sources */,
 				845137A72796247E00A4DA57 /* AnimalTypeSuggestionView.swift in Sources */,
+				03C08DBD28C513D100E53CF9 /* LoadingAnimation.swift in Sources */,
 				037ADD3C28724388009E29F2 /* AnimalEnvironment+CoreData.swift in Sources */,
 				847F49F626D3403B00B94FB8 /* APIConstants.swift in Sources */,
 				84A59F78269E906400237A83 /* AnimalAttributes.swift in Sources */,
@@ -950,6 +957,7 @@
 				03B6A8E2286F0E3500D63300 /* Animal.swift in Sources */,
 				03C08DB528C4DE6300E53CF9 /* AnimalDetailsViewRepresentable.swift in Sources */,
 				845137A82796247E00A4DA57 /* EmptyResultsView.swift in Sources */,
+				03C08DBF28C51CAE00E53CF9 /* PetRankingView.swift in Sources */,
 				03E1A8A2288C609C0011BFCF /* FetchAnimalsService.swift in Sources */,
 				8472DFCC26BF93B3000FEDAF /* AnimalsNearYouView.swift in Sources */,
 				03E1A8A8288C766B0011BFCF /* AnimalAttributesCard.swift in Sources */,
