@@ -29,6 +29,7 @@
 		037ADD4128724388009E29F2 /* PetSave.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 037ADD3328724388009E29F2 /* PetSave.xcdatamodeld */; };
 		037ADD4328734D99009E29F2 /* CoreDataPersistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037ADD4228734D99009E29F2 /* CoreDataPersistable.swift */; };
 		037ADD4528735195009E29F2 /* Breed+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037ADD4428735195009E29F2 /* Breed+CoreData.swift */; };
+		038C75F728C6502900A3D4DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 038C75F928C6502900A3D4DD /* Localizable.strings */; };
 		03B6A8E2286F0E3500D63300 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A8E1286F0E3500D63300 /* Animal.swift */; };
 		03B6A8E4286F0ED100D63300 /* AnimalsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A8E3286F0ED100D63300 /* AnimalsMock.swift */; };
 		03B6A8E7286F1C4100D63300 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A8E6286F1C4100D63300 /* RequestProtocol.swift */; };
@@ -160,6 +161,8 @@
 		037ADD3428724388009E29F2 /* PetSave.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PetSave.xcdatamodel; sourceTree = "<group>"; };
 		037ADD4228734D99009E29F2 /* CoreDataPersistable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataPersistable.swift; sourceTree = "<group>"; };
 		037ADD4428735195009E29F2 /* Breed+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breed+CoreData.swift"; sourceTree = "<group>"; };
+		038C75F828C6502900A3D4DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		038C75FA28C6502A00A3D4DD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		03B6A8E1286F0E3500D63300 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		03B6A8E3286F0ED100D63300 /* AnimalsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsMock.swift; sourceTree = "<group>"; };
 		03B6A8E6286F1C4100D63300 /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
@@ -475,6 +478,7 @@
 		18D775BF22AD944300AE281E /* PetSave */ = {
 			isa = PBXGroup;
 			children = (
+				038C75F928C6502900A3D4DD /* Localizable.strings */,
 				AE6A376D269A885E0054C842 /* Core */,
 				84B0506E26B0E2D600E0A709 /* AnimalDetails */,
 				AE6A376B269A86560054C842 /* AnimalsNearYou */,
@@ -850,6 +854,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03C08DB928C4DF7100E53CF9 /* AnimalDetailsViewController.xib in Resources */,
+				038C75F728C6502900A3D4DD /* Localizable.strings in Resources */,
 				18D775D822AD963800AE281E /* LaunchScreen.storyboard in Resources */,
 				18D775CA22AD944400AE281E /* Preview Assets.xcassets in Resources */,
 				18D775C722AD944400AE281E /* Assets.xcassets in Resources */,
@@ -1024,6 +1029,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		038C75F928C6502900A3D4DD /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				038C75F828C6502900A3D4DD /* en */,
+				038C75FA28C6502A00A3D4DD /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		18D775DA22AD963800AE281E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
