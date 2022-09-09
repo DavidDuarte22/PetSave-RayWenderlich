@@ -7,9 +7,14 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol AnimalsFetcher {
-  func fetchAnimals(page: Int) async -> [Animal]
+  func fetchAnimals(
+    page: Int,
+    latitude: Double?,
+    longitude: Double?
+  ) async -> [Animal]
 }
 
 protocol AnimalStore {
@@ -32,21 +37,30 @@ final class AnimalsNearYouViewModel: ObservableObject {
     self.animalStore = animalStore
   }
   
-  func fetchAnimals() async {
-    let animals = await animalFetcher.fetchAnimals(page: page)
+  func fetchAnimals(location: CLLocation?) async {
+    isLoading = true
     do {
+      // Pass the user’s latitude and longitude from location to the request to fetch animals.
+      let animals = await animalFetcher.fetchAnimals(
+        page: page,
+        latitude: location?.coordinate.latitude,
+        longitude: location?.coordinate.longitude
+      )
+
+      // Store the animals from the response
       try await animalStore.save(animals: animals)
+
+      // Set hasMoreAnimals to false if the response returned no animals.
+      hasMoreAnimals = !animals.isEmpty
     } catch {
-      print("Error storing animals... \(error.localizedDescription)")
+      // Catch and print the error fetching animals may cause.
+      print("Error fetching animals... \(error.localizedDescription)")
     }
-    
-    self.isLoading = false
-    // If the response from Petfinder’s API returns an empty array of animals, you’ll set this property to false, as that means the list has reached its end.
-    hasMoreAnimals = !animals.isEmpty
+    isLoading = false
   }
   
-  func fetchMoreAnimals() async {
+  func fetchMoreAnimals(location: CLLocation?) async {
     page += 1
-    await fetchAnimals()
+    await fetchAnimals(location: location)
   }
 }

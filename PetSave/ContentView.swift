@@ -37,7 +37,8 @@ struct ContentView: View {
   let managedObjectContext =
   PersistenceController.shared.container.viewContext
   @StateObject var tabNavigator = PetSaveTabNavigator()
-  
+  @StateObject var locationManager = LocationManager()
+
   var body: some View {
     // You pass in the currentTab from the PetSaveTabNavigator object to the selection initializer.
     TabView(selection: $tabNavigator.currentTab) {
@@ -64,6 +65,8 @@ struct ContentView: View {
         }
         .environment(\.managedObjectContext, managedObjectContext)
     }
+    .environmentObject(locationManager)
+
     // Receive the opened url
     .onOpenURL { url in
       // Get the correct tab type using url.
@@ -76,6 +79,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    ContentView()
+    ContentView().environmentObject(LocationManager())
+
   }
 }

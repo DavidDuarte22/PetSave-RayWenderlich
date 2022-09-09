@@ -30,6 +30,7 @@
 		037ADD4328734D99009E29F2 /* CoreDataPersistable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037ADD4228734D99009E29F2 /* CoreDataPersistable.swift */; };
 		037ADD4528735195009E29F2 /* Breed+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 037ADD4428735195009E29F2 /* Breed+CoreData.swift */; };
 		038C75F728C6502900A3D4DD /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 038C75F928C6502900A3D4DD /* Localizable.strings */; };
+		038C75FC28C6539600A3D4DD /* RequestLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038C75FB28C6539600A3D4DD /* RequestLocationView.swift */; };
 		03B6A8E2286F0E3500D63300 /* Animal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A8E1286F0E3500D63300 /* Animal.swift */; };
 		03B6A8E4286F0ED100D63300 /* AnimalsMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A8E3286F0ED100D63300 /* AnimalsMock.swift */; };
 		03B6A8E7286F1C4100D63300 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B6A8E6286F1C4100D63300 /* RequestProtocol.swift */; };
@@ -163,6 +164,7 @@
 		037ADD4428735195009E29F2 /* Breed+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Breed+CoreData.swift"; sourceTree = "<group>"; };
 		038C75F828C6502900A3D4DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		038C75FA28C6502A00A3D4DD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		038C75FB28C6539600A3D4DD /* RequestLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLocationView.swift; sourceTree = "<group>"; };
 		03B6A8E1286F0E3500D63300 /* Animal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animal.swift; sourceTree = "<group>"; };
 		03B6A8E3286F0ED100D63300 /* AnimalsMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalsMock.swift; sourceTree = "<group>"; };
 		03B6A8E6286F1C4100D63300 /* RequestProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
@@ -609,6 +611,7 @@
 				8472DFCB26BF93B3000FEDAF /* AnimalsNearYouView.swift */,
 				03B6A8FD286F305C00D63300 /* AnimalRow.swift */,
 				03E1A8A7288C766B0011BFCF /* AnimalAttributesCard.swift */,
+				038C75FB28C6539600A3D4DD /* RequestLocationView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -958,6 +961,7 @@
 				037ADD3B28724388009E29F2 /* User+CoreData.swift in Sources */,
 				037ADD3E28724388009E29F2 /* Animal+CoreData.swift in Sources */,
 				037ADD3728724388009E29F2 /* Address+CoreData.swift in Sources */,
+				038C75FC28C6539600A3D4DD /* RequestLocationView.swift in Sources */,
 				8FDD2CA326B311AC00DBE33F /* Pagination.swift in Sources */,
 				03B6A8E2286F0E3500D63300 /* Animal.swift in Sources */,
 				03C08DB528C4DE6300E53CF9 /* AnimalDetailsViewRepresentable.swift in Sources */,
